@@ -1,30 +1,31 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:rest_api/models/note_modify.dart';
 import 'package:rest_api/models/notes_for_listing.dart';
+import 'package:rest_api/services/notes_service.dart';
 import 'package:rest_api/views/note_delete.dart';
 
-class NoteList extends StatelessWidget {
+class NoteList extends StatefulWidget {
   NoteList({Key? key}) : super(key: key);
 
-  final notes = [
-    new NoteForListing(
-        noteID: "1",
-        createDateTime: DateTime.now(),
-        latestEditDateTime: DateTime.now(),
-        noteTitle: "Note 1"),
-    new NoteForListing(
-        noteID: "2",
-        createDateTime: DateTime.now(),
-        latestEditDateTime: DateTime.now(),
-        noteTitle: "Note 2"),
-    new NoteForListing(
-        noteID: "2",
-        createDateTime: DateTime.now(),
-        latestEditDateTime: DateTime.now(),
-        noteTitle: "Note 2"),
-  ];
+  @override
+  State<NoteList> createState() => _NoteListState();
+}
+
+class _NoteListState extends State<NoteList> {
+  NotesService get service => GetIt.I<NotesService>();
+  List<NoteForListing> notes = [];
+  String formatDateTime(DateTime dateTime) {
+    return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+  }
+
+  @override
+  void initState() {
+    notes = service.getNotesList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +66,8 @@ class NoteList extends StatelessWidget {
                 notes[index].noteTitle!,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
-              subtitle:
-                  Text('Last edited on ${notes[index].latestEditDateTime}'),
+              subtitle: Text(
+                  'Last edited on ${formatDateTime(notes[index].latestEditDateTime!)}'),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => NoteModify(noteID: notes[index].noteID)));
