@@ -17,9 +17,7 @@ class NotesService {
         for (var item in jsonData) {
           notes.add(NoteForListing.fromJson(item));
         }
-        return APIResponse<List<NoteForListing>>(
-          data: notes,
-        );
+        return APIResponse<List<NoteForListing>>(data: notes);
       }
       return APIResponse<List<NoteForListing>>(
           error: true, errorMessage: 'An error occured');
@@ -28,7 +26,7 @@ class NotesService {
   }
 
   Future<APIResponse<Note>> getNote(String noteID) {
-    return http.get(Uri.parse(API + '/notes/'), headers: headers).then((data) {
+    return http.get(Uri.parse(API + '/notes/' + noteID), headers: headers).then((data) {
       if (data.statusCode == 200) {
         final jsonData = json.decode(data.body);
 
