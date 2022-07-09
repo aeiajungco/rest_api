@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 class NoteDelete extends StatelessWidget {
@@ -11,7 +13,7 @@ class NoteDelete extends StatelessWidget {
       actions: [
         TextButton(
             onPressed: () {
-              Navigator.of(context).pop;
+              Navigator.of(context).pop(true);
             },
             child: Text('Yes')),
         TextButton(
