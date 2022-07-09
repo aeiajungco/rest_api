@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rest_api/models/api_response.dart';
 import 'package:rest_api/models/note_modify.dart';
-import 'package:rest_api/models/notes_for_listing.dart';
+import 'package:rest_api/models/note_for_listing.dart';
 import 'package:rest_api/services/notes_service.dart';
 import 'package:rest_api/views/note_delete.dart';
 
