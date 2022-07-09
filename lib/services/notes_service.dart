@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:rest_api/models/api_response.dart';
 import 'package:rest_api/models/note_insert.dart';
-import 'package:rest_api/models/notes_for_listing.dart';
+import 'package:rest_api/models/note_for_listing.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/note.dart';

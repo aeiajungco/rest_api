@@ -1,21 +1,20 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'note.g.dart';
+part 'note_for_listing.g.dart';
 
 @JsonSerializable()
-class Note {
+class NoteForListing {
   String? noteID;
   String? noteTitle;
-  String? noteContent;
   DateTime? createDateTime;
   DateTime? latestEditDateTime;
 
-  Note(
+  NoteForListing(
       {this.noteID,
       this.noteTitle,
-      this.noteContent,
       this.createDateTime,
       this.latestEditDateTime});
 
-  factory Note.fromJson(Map<String, dynamic> item) => _$NoteFromJson(item);
+  factory NoteForListing.fromJson(Map<String, dynamic> item) =>
+      _$NoteForListingFromJson(item);
 }
