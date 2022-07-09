@@ -75,8 +75,38 @@ class _NoteListState extends State<NoteList> {
                   direction: DismissDirection.startToEnd,
                   onDismissed: (direction) {},
                   confirmDismiss: (direction) async {
+                        print('asdfg');
                     final result = await showDialog(
                         context: context, builder: (_) => NoteDelete());
+                    if (result) {
+                      final deleteResult = await service
+                          .deleteNote(_apiResponse!.data![index].noteID!);
+
+                      var message;
+
+                      if (deleteResult != null && deleteResult.data == true) {
+                        message = 'The note was delete successfully';
+                      } else {
+                        message =
+                            deleteResult.errorMessage ?? 'An error occurred';
+                      }
+                      showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                                title: Text('Done'),
+                                content: Text(message),
+                                actions: [
+                                  TextButton(
+                                    child: Text('Ok'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  )
+                                ],
+                              ));
+
+                      return deleteResult.data ?? false;
+                    }
                     return result;
                   },
                   background: Container(

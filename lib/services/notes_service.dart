@@ -56,7 +56,7 @@ class NotesService {
             APIResponse<bool>(error: true, errorMessage: 'An error occured'));
   }
 
-   Future<APIResponse<bool>> updateNote(String noteID, NoteManipulation item) {
+  Future<APIResponse<bool>> updateNote(String noteID, NoteManipulation item) {
     return http
         .put(Uri.parse(API + '/notes/' + noteID),
             headers: headers, body: json.encode(item.toJson()))
@@ -69,4 +69,15 @@ class NotesService {
             APIResponse<bool>(error: true, errorMessage: 'An error occured'));
   }
 
+  Future<APIResponse<bool>> deleteNote(String noteID) {
+    return http
+        .delete(Uri.parse(API + '/notes/' + noteID), headers: headers)
+        .then((data) {
+      if (data.statusCode == 204) {
+        return APIResponse<bool>(data: true);
+      }
+      return APIResponse<bool>(error: true, errorMessage: 'An error occured');
+    }).catchError((_) =>
+            APIResponse<bool>(error: true, errorMessage: 'An error occured'));
+  }
 }
