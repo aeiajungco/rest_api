@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rest_api/models/api_response.dart';
-import 'package:rest_api/models/note_modify.dart';
+import 'package:rest_api/views/note_modify.dart';
 import 'package:rest_api/models/note_for_listing.dart';
 import 'package:rest_api/services/notes_service.dart';
 import 'package:rest_api/views/note_delete.dart';
@@ -75,7 +75,6 @@ class _NoteListState extends State<NoteList> {
                   direction: DismissDirection.startToEnd,
                   onDismissed: (direction) {},
                   confirmDismiss: (direction) async {
-                        print('asdfg');
                     final result = await showDialog(
                         context: context, builder: (_) => NoteDelete());
                     if (result) {
